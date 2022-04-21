@@ -1,0 +1,32 @@
+{
+    "name": "Chair",
+    "base": [
+        {
+            "shape": "RECTANGULAR",
+            "size": "30 30 5",
+            "color": "BLACK",
+            "material": "WOODEN"
+        }
+    ],
+    "legs": [
+        {
+            "shape": "ROUND",
+            "size": "40 3",
+            "color": "BLACK",
+            "material": "WOODEN"
+        },
+        {
+            "shape": "ROUND",
+            "size": "40 3",
+            "color": "BLACK",
+            "material": "WOODEN"
+        },
+        {
+            "shape": "ROUND",
+            "size": "40 3",
+            "color": "BLACK",
+            "material": "WOODEN"
+        }
+    ],
+    "back": []
+}

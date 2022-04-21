@@ -1,0 +1,40 @@
+{
+    "name": "Sofa",
+    "frame": [
+        {
+            "shape": "RECTANGULAR",
+            "size": "100 50 7",
+            "color": "GRAY",
+            "material": "WOODEN"
+        },
+        {
+            "shape": "RECTANGULAR",
+            "size": "100 50 7",
+            "color": "GRAY",
+            "material": "WOODEN"
+        },
+        {
+            "shape": "RECTANGULAR",
+            "size": "100 30 7",
+            "color": "GRAY",
+            "material": "WOODEN"
+        },
+        {
+            "shape": "RECTANGULAR",
+            "size": "50 30 7",
+            "color": "BLACK",
+            "material": "WOODEN"
+        },
+        {
+            "shape": "RECTANGULAR",
+            "size": "50 30 7",
+            "color": "BLACK",
+            "material": "WOODEN"
+        }
+    ],
+    "filler":
+    {
+        "material": "FELT",
+        "volume": 5000
+    }
+}

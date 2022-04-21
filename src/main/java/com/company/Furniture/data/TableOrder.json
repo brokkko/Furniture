@@ -1,0 +1,19 @@
+{
+    "name": "Table",
+    "base": [
+        {
+            "shape": "ROUND",
+            "size": "5 30",
+            "color": "GRAY",
+            "material": "GLASS"
+        }
+    ],
+    "legs": [
+        {
+            "shape": "ROUND",
+            "size": "10 5",
+            "color": "WHITE",
+            "material": "STONE"
+        }
+    ]
+}
