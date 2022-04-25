@@ -1,4 +1,4 @@
-package com.company.Furniture.components.Furniture;
+package com.company.Furniture.components.furniture;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -8,10 +8,11 @@ import java.util.List;
 
 @Getter
 @Setter
+@Builder
 public class Chair implements Component {
     private List<Component> elements;
 
-    @Builder
+
     public Chair(List<Component> elements){
         this.elements = elements;
     }

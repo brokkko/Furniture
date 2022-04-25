@@ -1,4 +1,4 @@
-package com.company.Furniture.components.Furniture;
+package com.company.Furniture.components.furniture;
 
 import lombok.Builder;
 import lombok.Getter;

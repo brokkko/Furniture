@@ -1,6 +1,6 @@
 package com.company.Furniture.services;
 
-import com.company.Furniture.components.Furniture.*;
+import com.company.Furniture.components.furniture.*;
 import com.company.Furniture.components.shape.RectangularShape;
 import com.company.Furniture.components.shape.RoundShape;
 import com.company.Furniture.components.shape.Shaped;

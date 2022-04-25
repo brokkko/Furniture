@@ -1,4 +1,4 @@
-package com.company.Furniture.components.Furniture;
+package com.company.Furniture.components.furniture;
 
 import com.company.Furniture.components.shape.Shaped;
 import com.company.Furniture.components.types.TypeColor;

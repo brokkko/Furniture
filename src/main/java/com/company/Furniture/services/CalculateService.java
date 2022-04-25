@@ -1,6 +1,6 @@
 package com.company.Furniture.services;
 
-import com.company.Furniture.components.Furniture.Component;
+import com.company.Furniture.components.furniture.Component;
 import com.company.Furniture.components.types.TypeUnits;
 
 import java.util.List;

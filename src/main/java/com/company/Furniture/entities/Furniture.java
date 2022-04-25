@@ -1,4 +1,4 @@
-package com.company.Furniture.domain;
+package com.company.Furniture.entities;
 
 import lombok.*;
 
@@ -10,21 +10,21 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name="Products")
-public class FurnitureEntity {
+@Table(name="products")
+public class Furniture {
 
     @Id
-    @Column(name = "prid")
+    @Column(name = "product_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "prname")
+    @Column(name = "product_name")
     private String name;
 
-    @Column(name = "prweight")
+    @Column(name = "weight")
     private Integer weight;
 
-    public FurnitureEntity(String name, Integer weight) {
+    public Furniture(String name, Integer weight) {
         this.name = name;
         this.weight = weight;
     }
