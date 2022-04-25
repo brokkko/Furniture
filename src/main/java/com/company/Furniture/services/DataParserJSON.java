@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class OrderJSON implements OrderService{
+public class DataParserJSON implements DataParserService {
 
     private JSONObject parseJSON(String orderName) {
         Object obj = null;
@@ -85,7 +85,7 @@ public class OrderJSON implements OrderService{
     }
 
     @Override
-    public Component packingChairOrder(String orderName){
+    public Component unpackingChairOrder(String orderName){
         JSONObject order = this.parseJSON(orderName);
 
         JSONArray array = (JSONArray) order.get("base");
@@ -100,7 +100,7 @@ public class OrderJSON implements OrderService{
 
 
     @Override
-    public Component packingTableOrder(String orderName) {
+    public Component unpackingTableOrder(String orderName) {
         JSONObject order = this.parseJSON(orderName);
         JSONArray array = (JSONArray) order.get("base");
         ArrayList<Component> elements = new ArrayList<>(this.unpackUnitFields(array));
@@ -111,7 +111,7 @@ public class OrderJSON implements OrderService{
     }
 
     @Override
-    public Component packingSofaOrder(String orderName) {
+    public Component unpackingSofaOrder(String orderName) {
         JSONObject order = this.parseJSON(orderName);
         JSONArray array = (JSONArray) order.get("frame");
         ArrayList<Component> elements = new ArrayList<>(this.unpackUnitFields(array));

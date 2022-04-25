@@ -2,47 +2,42 @@ package com.company.Furniture;
 
 import com.company.Furniture.components.Furniture.Component;
 import com.company.Furniture.components.types.TypeUnits;
-import com.company.Furniture.entity.Entity;
-import com.company.Furniture.repository.EntityRepository;
-import com.company.Furniture.services.CalculateService;
-import com.company.Furniture.services.CalculateServiceImpl;
-import com.company.Furniture.services.OrderJSON;
-import com.company.Furniture.services.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.company.Furniture.domain.FurnitureEntity;
+import com.company.Furniture.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class FurnitureApplication {
-	@Autowired
-	private EntityRepository repo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(FurnitureApplication.class, args);
 	}
 
 	@Bean
-	public CommandLineRunner CommandLineRunnerBean() {
-		return (args) -> {
+	CommandLineRunner runner(DataLoaderService service){
+		return args -> {
 			System.out.println("START");
-			repo.deleteAll();
+			service.deleteAll();
 
 			CalculateService calculator = new CalculateServiceImpl();
-			OrderService orderService = new OrderJSON();
+			DataParserService dataParserService = new DataParserJSON();
 
-			Component chair = orderService.packingChairOrder("src/main/java/com/company/Furniture/data/ChairOrder.json");
-			Entity order = new Entity("Chair", (int) calculator.getWeight(chair, TypeUnits.GRAMS));
-			repo.save(order);
+			Component chair = dataParserService.unpackingChairOrder("src/main/java/com/company/Furniture/data/ChairOrder.json");
+			Component table = dataParserService.unpackingTableOrder("src/main/java/com/company/Furniture/data/TableOrder.json");
 
-			Component table = orderService.packingTableOrder("src/main/java/com/company/Furniture/data/TableOrder.json");
-			System.out.println("Вес стола: " + calculator.getWeight(table, TypeUnits.GRAMS) + " гр");
-			order = new Entity("Table", (int) calculator.getWeight(table, TypeUnits.GRAMS));
-			repo.save(order);
+			List<FurnitureEntity> furnitureEntityList = List.of(
+					new FurnitureEntity("Chair", (int) calculator.getWeight(chair, TypeUnits.GRAMS)),
+					new FurnitureEntity("Table", (int) calculator.getWeight(table, TypeUnits.GRAMS))
+					);
+			service.save(furnitureEntityList);
+
 			System.out.println("DONE");
 		};
 	}
-
 }
