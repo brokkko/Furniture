@@ -21,4 +21,9 @@ public class Filler implements Component {
     public double getWeight() {
         return this.volume * this.material.getDensity();
     }
+
+    @Override
+    public String getName() {
+        return this.getClass().getSimpleName();
+    }
 }

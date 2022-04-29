@@ -25,4 +25,9 @@ public class Cupboard implements Component {
         }
         return Math.round(sum);
     }
+
+    @Override
+    public String getName() {
+        return this.getClass().getSimpleName();
+    }
 }

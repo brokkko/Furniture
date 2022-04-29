@@ -25,4 +25,9 @@ public class Unit implements Component {
     public double getWeight() {
         return this.shape.getVolume() * this.material.getDensity();
     }
+
+    @Override
+    public String getName() {
+        return this.getClass().getSimpleName();
+    }
 }

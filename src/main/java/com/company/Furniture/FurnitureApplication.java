@@ -1,8 +1,5 @@
 package com.company.Furniture;
 
-import com.company.Furniture.components.furniture.Component;
-import com.company.Furniture.components.types.TypeUnits;
-import com.company.Furniture.entities.Furniture;
 import com.company.Furniture.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,24 +16,17 @@ public class FurnitureApplication {
 	}
 
 	@Bean
-	CommandLineRunner runner(DataLoaderService service){
+	CommandLineRunner runner(DataLoaderServiceImpl service){
 		return args -> {
-			System.out.println("START");
-			service.deleteAll();
 
-			CalculateService calculator = new CalculateServiceImpl();
-			DataParserService dataParserService = new DataParserJSON();
+			ControllerService controllerService = new ControllerServiceImpl(service);
+			List<String> filesList = List.of(
+					"src/main/java/com/company/Furniture/data/ChairOrder.json",
+					"src/main/java/com/company/Furniture/data/TableOrder.json"
+			);
 
-			Component chair = dataParserService.unpackingChairOrder("src/main/java/com/company/Furniture/data/ChairOrder.json");
-			Component table = dataParserService.unpackingTableOrder("src/main/java/com/company/Furniture/data/TableOrder.json");
+			controllerService.saveOrder(filesList);
 
-			List<Furniture> furnitureEntityList = List.of(
-					new Furniture("Chair", (int) calculator.getWeight(chair, TypeUnits.GRAMS)),
-					new Furniture("Table", (int) calculator.getWeight(table, TypeUnits.GRAMS))
-					);
-			service.save(furnitureEntityList);
-
-			System.out.println("DONE");
 		};
 	}
 }

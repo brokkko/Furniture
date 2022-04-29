@@ -27,9 +27,8 @@ public class Chair implements Component {
     }
 
     @Override
-    public String toString() {
-        return "Chair{" +
-                "elements=" + elements +
-                '}';
+    public String getName() {
+        return this.getClass().getSimpleName();
     }
+
 }

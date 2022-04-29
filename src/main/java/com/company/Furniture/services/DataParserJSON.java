@@ -7,6 +7,7 @@ import com.company.Furniture.components.shape.Shaped;
 import com.company.Furniture.components.types.TypeColor;
 import com.company.Furniture.components.types.TypeMaterial;
 
+import com.company.Furniture.components.types.TypeProduct;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -84,8 +85,7 @@ public class DataParserJSON implements DataParserService {
         return elements;
     }
 
-    @Override
-    public Component unpackingChairOrder(String orderName){
+    private Component unpackingChairOrder(String orderName){
         JSONObject order = this.parseJSON(orderName);
 
         JSONArray array = (JSONArray) order.get("base");
@@ -98,9 +98,7 @@ public class DataParserJSON implements DataParserService {
         return Chair.builder().elements(elements).build();
     }
 
-
-    @Override
-    public Component unpackingTableOrder(String orderName) {
+    private Component unpackingTableOrder(String orderName) {
         JSONObject order = this.parseJSON(orderName);
         JSONArray array = (JSONArray) order.get("base");
         ArrayList<Component> elements = new ArrayList<>(this.unpackUnitFields(array));
@@ -110,14 +108,30 @@ public class DataParserJSON implements DataParserService {
         return Table.builder().elements(elements).build();
     }
 
-    @Override
-    public Component unpackingSofaOrder(String orderName) {
+    private Component unpackingSofaOrder(String orderName) {
         JSONObject order = this.parseJSON(orderName);
         JSONArray array = (JSONArray) order.get("frame");
         ArrayList<Component> elements = new ArrayList<>(this.unpackUnitFields(array));
         elements.add(this.unpackFillerFields((JSONObject) order.get("filler")));
 
         return Sofa.builder().elements(elements).build();
+    }
+
+    @Override
+    public Component unpackingOrder(String orderFile) {
+        JSONObject order = this.parseJSON(orderFile);
+        String name = (String) order.get("name");
+        if(Objects.equals(name, TypeProduct.CHAIR.getName())){
+            return unpackingChairOrder(orderFile);
+        }
+        if(Objects.equals(name, TypeProduct.TABLE.getName())){
+            return unpackingTableOrder(orderFile);
+        }
+        if(Objects.equals(name, TypeProduct.SOFA.getName())){
+            return unpackingSofaOrder(orderFile);
+        }
+
+        return null;
     }
 
 }

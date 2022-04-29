@@ -24,4 +24,9 @@ public class Frame implements Component{
         }
         return sum;
     }
+
+    @Override
+    public String getName() {
+        return this.getClass().getSimpleName();
+    }
 }
