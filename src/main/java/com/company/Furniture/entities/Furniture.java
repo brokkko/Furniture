@@ -3,6 +3,8 @@ package com.company.Furniture.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.rmi.server.UID;
+import java.util.UUID;
 
 @javax.persistence.Entity
 @Getter
@@ -16,9 +18,9 @@ public class Furniture {
     @Id
     @Column(name = "product_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private UUID id;
 
-    @Column(name = "product_name")
+    @Column(name = "title")
     private String name;
 
     @Column(name = "weight")
