@@ -8,6 +8,7 @@ import com.company.Furniture.components.types.TypeColor;
 import com.company.Furniture.components.types.TypeMaterial;
 
 import com.company.Furniture.components.types.TypeProduct;
+import com.company.Furniture.components.types.TypeShape;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -17,37 +18,34 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Objects;
 
 public class DataParserJSON implements DataParserService {
 
     private JSONObject parseJSON(String orderName) {
-        Object obj = null;
-
         try {
-            obj = new JSONParser().parse(new FileReader(orderName));
+            return (JSONObject) new JSONParser().parse(new FileReader(orderName));
         } catch (IOException | ParseException e) {
-            e.printStackTrace();
-            System.exit(1);
+            return null;
         }
-        return (JSONObject) obj;
     }
 
     private Shaped unpackShape(String shapeName, ArrayList<Double> size) {
-        if(Objects.equals(shapeName, "RECTANGULAR")){
-            return RectangularShape.builder()
-                    .width(size.get(0))
-                    .depth(size.get(1))
-                    .height(size.get(2))
-                    .build();
+        TypeShape name = TypeShape.valueOf((shapeName).toUpperCase());
+        switch (name){
+            case ROUND:
+                return RoundShape.builder()
+                        .height(size.get(0))
+                        .radius(size.get(1))
+                        .build();
+            case RECTANGULAR:
+                return RectangularShape.builder()
+                        .width(size.get(0))
+                        .depth(size.get(1))
+                        .height(size.get(2))
+                        .build();
+            default:
+                throw new IllegalArgumentException();
         }
-        if(Objects.equals(shapeName, "ROUND")){
-            return RoundShape.builder()
-                    .height(size.get(0))
-                    .radius(size.get(1))
-                    .build();
-        }
-        throw new IllegalArgumentException("Shape type is null");
     }
 
     private TypeColor unpackColor(String colorName){
@@ -120,18 +118,20 @@ public class DataParserJSON implements DataParserService {
     @Override
     public Component unpackingOrder(String orderFile) {
         JSONObject order = this.parseJSON(orderFile);
-        String name = (String) order.get("name");
-        if(Objects.equals(name, TypeProduct.CHAIR.getName())){
-            return unpackingChairOrder(orderFile);
+        if(order == null){
+            throw new NullPointerException();
         }
-        if(Objects.equals(name, TypeProduct.TABLE.getName())){
-            return unpackingTableOrder(orderFile);
+        TypeProduct name = TypeProduct.valueOf(((String) order.get("name")).toUpperCase());
+        switch (name) {
+            case  CHAIR:
+                return unpackingChairOrder(orderFile);
+            case TABLE:
+                return unpackingTableOrder(orderFile);
+            case SOFA:
+                return unpackingSofaOrder(orderFile);
+            default:
+                throw new IllegalArgumentException();
         }
-        if(Objects.equals(name, TypeProduct.SOFA.getName())){
-            return unpackingSofaOrder(orderFile);
-        }
-
-        return null;
     }
 
 }

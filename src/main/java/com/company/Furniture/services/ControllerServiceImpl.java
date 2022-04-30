@@ -3,13 +3,11 @@ package com.company.Furniture.services;
 import com.company.Furniture.components.furniture.Component;
 import com.company.Furniture.components.types.TypeUnits;
 import com.company.Furniture.entities.Furniture;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ControllerServiceImpl implements ControllerService{
-   // @Autowired
     private final DataLoaderService dataLoaderService;
     private final CalculateService calculateService;
     private final DataParserService dataParserService;
@@ -30,7 +28,12 @@ public class ControllerServiceImpl implements ControllerService{
 
         List<Component> componentList = new ArrayList<>();
         for(String file: files){
-            componentList.add(this.parseFile(file));
+            try{
+                componentList.add(this.parseFile(file));
+            }
+            catch (NullPointerException e) {
+                System.out.println("Incorrect file.");
+            }
         }
 
         List<Furniture> furnitureEntityList = new ArrayList<>();
