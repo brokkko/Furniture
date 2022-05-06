@@ -10,7 +10,8 @@ public enum TypeProduct {
     CUPBOARD("Cupboard");
 
     private final String name; // названия продуктов
+
     TypeProduct(String name) {
         this.name = name;
     }
-    }
+}

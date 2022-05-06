@@ -1,7 +1,10 @@
 package com.company.Furniture.components.furniture;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -9,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
 public class Chair implements Component {
     private List<Component> elements;
 

@@ -3,13 +3,15 @@ package com.company.Furniture.components.shape;
 import com.company.Furniture.components.types.TypeShape;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@Builder
+@NoArgsConstructor
 public class RoundShape implements Shaped {
-    private final double height;
-    private final double radius;
+    private double height;
+    private double radius;
 
-    @Builder
     public RoundShape(double height, double radius) {
         this.height = height;
         this.radius = radius;

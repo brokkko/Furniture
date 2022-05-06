@@ -1,0 +1,24 @@
+{
+  "elements" : [ {
+    "shape" : {
+      "width" : 10.0,
+      "height" : 5.0,
+      "depth" : 3.0,
+      "name" : "com.company.Furniture.components.shape.RectangularShape"
+    },
+    "color" : "BLACK",
+    "material" : "WOODEN",
+    "name" : "com.company.Furniture.components.furniture.Unit"
+  }, {
+    "shape" : {
+      "width" : 10.0,
+      "height" : 5.0,
+      "depth" : 3.0,
+      "name" : "com.company.Furniture.components.shape.RectangularShape"
+    },
+    "color" : "BLACK",
+    "material" : "WOODEN",
+    "name" : "com.company.Furniture.components.furniture.Unit"
+  }],
+  "name" : "com.company.Furniture.components.furniture.Chair"
+}

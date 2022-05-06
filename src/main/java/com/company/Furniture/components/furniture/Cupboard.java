@@ -2,6 +2,7 @@ package com.company.Furniture.components.furniture;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -9,10 +10,11 @@ import java.util.List;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
 public class Cupboard implements Component {
     private List<Component> elements;
 
-    @Builder
     public Cupboard(List<Component> elements){
         this.elements = elements;
     }

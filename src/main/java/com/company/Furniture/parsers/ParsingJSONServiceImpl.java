@@ -1,0 +1,33 @@
+package com.company.Furniture.parsers;
+
+import com.company.Furniture.ApplicationController;
+import com.company.Furniture.components.furniture.Component;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class ParsingJSONServiceImpl implements ParsingDataService {
+    private final Logger LOG = Logger.getLogger(ParsingJSONServiceImpl.class.getName());
+    private final ObjectMapper objectMapper;
+
+    public ParsingJSONServiceImpl(){
+        objectMapper = new ObjectMapper();
+    }
+
+    @Override
+    public Component parseData(String inputStream) throws IOException {
+        JsonNode parent= new ObjectMapper().readTree(inputStream);
+        String className = parent.path("name").asText();
+        try{
+            DefineProductService defineProductService = new DefineProductServiceImpl();
+            Class<? extends Component> type = defineProductService.defineProductByName(className);
+            return objectMapper.readValue(inputStream, type);
+        } catch (IllegalArgumentException e){
+            LOG.log(Level.WARNING, "Class name is not correct: ", e);
+            return null;
+        }
+    }
+}

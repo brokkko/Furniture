@@ -2,16 +2,18 @@ package com.company.Furniture.components.furniture;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
 public class Table implements Component {
     private List<Component> elements;
 
-    @Builder
     public Table(List<Component> elements){
         this.elements = elements;
     }

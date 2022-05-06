@@ -3,7 +3,6 @@ package com.company.Furniture.entities;
 import lombok.*;
 
 import javax.persistence.*;
-import java.rmi.server.UID;
 import java.util.UUID;
 
 @javax.persistence.Entity
@@ -13,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Table(name="products")
-public class Furniture {
+public class Product {
 
     @Id
     @Column(name = "product_id")
@@ -26,7 +25,7 @@ public class Furniture {
     @Column(name = "weight")
     private Integer weight;
 
-    public Furniture(String name, Integer weight) {
+    public Product(String name, Integer weight) {
         this.name = name;
         this.weight = weight;
     }

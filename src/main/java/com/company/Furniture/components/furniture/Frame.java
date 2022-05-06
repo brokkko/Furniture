@@ -2,12 +2,14 @@ package com.company.Furniture.components.furniture;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class Frame implements Component{
     private List<Unit> bases;
 

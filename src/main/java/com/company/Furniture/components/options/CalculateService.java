@@ -1,4 +1,4 @@
-package com.company.Furniture.services;
+package com.company.Furniture.components.options;
 
 import com.company.Furniture.components.furniture.Component;
 import com.company.Furniture.components.types.TypeUnits;

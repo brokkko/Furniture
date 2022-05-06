@@ -1,16 +1,19 @@
 package com.company.Furniture.components.shape;
 
 import com.company.Furniture.components.types.TypeShape;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
+@Builder
 public class RectangularShape implements Shaped {
-    private final double width;
-    private final double height;
-    private final double depth;
+    private double width;
+    private double height;
+    private double depth;
 
-    @Builder
     public RectangularShape(double width, double height, double depth) {
         this.width = width;
         this.height = height;

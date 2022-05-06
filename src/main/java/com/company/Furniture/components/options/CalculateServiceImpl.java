@@ -1,11 +1,11 @@
-package com.company.Furniture.services;
+package com.company.Furniture.components.options;
 
 import com.company.Furniture.components.furniture.Component;
 import com.company.Furniture.components.types.TypeUnits;
 
 import java.util.List;
 
-public class CalculateServiceImpl implements CalculateService{
+public class CalculateServiceImpl implements CalculateService {
     @Override
     public double getWeight(List<Component> furniture, TypeUnits units) {
         double sumWeight = 0;

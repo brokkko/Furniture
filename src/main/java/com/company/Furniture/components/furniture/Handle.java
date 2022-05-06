@@ -4,10 +4,12 @@ import com.company.Furniture.components.types.TypeColor;
 import com.company.Furniture.components.types.TypeMaterial;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class Handle implements Component {
     private Shaped shape;
     private TypeColor color;
