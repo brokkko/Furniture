@@ -1,6 +1,5 @@
 package com.company.Furniture.parsers;
 
-import com.company.Furniture.ApplicationController;
 import com.company.Furniture.components.furniture.Component;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Level;
 
 @Service
 @Slf4j
