@@ -2,9 +2,11 @@ package com.company.Furniture.components.options;
 
 import com.company.Furniture.components.furniture.Component;
 import com.company.Furniture.components.types.TypeUnits;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CalculateServiceImpl implements CalculateService {
     @Override
     public double getWeight(List<Component> furniture, TypeUnits units) {
