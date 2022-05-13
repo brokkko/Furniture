@@ -2,6 +2,7 @@ package com.company.Furniture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.company.Furniture.controllers.ProductController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class FurnitureApplicationTests {
 	@Autowired
-	private ApplicationController controller;
+	private ProductController controller;
 
 	@Autowired
 	private MockMvc mockMvc;

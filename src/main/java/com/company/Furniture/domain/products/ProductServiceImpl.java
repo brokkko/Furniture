@@ -1,10 +1,10 @@
-package com.company.Furniture.repositories;
+package com.company.Furniture.domain.products;
 
 import com.company.Furniture.components.furniture.Component;
 import com.company.Furniture.components.options.CalculateService;
 import com.company.Furniture.components.options.CalculateServiceImpl;
 import com.company.Furniture.components.types.TypeUnits;
-import com.company.Furniture.entities.Product;
+import com.company.Furniture.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,42 +12,46 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class ConnectingDBServiceImpl implements ConnectingDBService {
+public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final CalculateService calculateService;
 
-    public ConnectingDBServiceImpl(ProductRepository entityRepository,
-                                CalculateServiceImpl calculateWeightService){
+    public ProductServiceImpl(ProductRepository entityRepository,
+                              CalculateServiceImpl calculateWeightService){
         productRepository = entityRepository;
         calculateService = calculateWeightService;
     }
 
     @Override
-    public void saveElement(Component component) {
+    public void save(Component component) {
         productRepository.save(new Product(component.getName(), (int) calculateService.getWeight(component, TypeUnits.GRAMS)));
     }
 
     @Override
-    public void saveByParameters(String name, int weight) {
-        productRepository.save(new Product(name, weight));
-    }
-
-    @Override
-    public void saveAllElements(List<Component> componentsList) {
+    public void saveAll(List<Component> componentsList) {
         for(Component component : componentsList){
-            saveElement(component);
+            save(component);
         }
     }
 
     @Override
-    public void deleteAllElements() {
+    public void deleteAll() {
         productRepository.deleteAll();
     }
 
     @Override
+    public void deleteAll(List<Component> productList) {
+        for(Component component : productList){
+            productRepository.delete(
+                    new Product(component.getName(), (int) calculateService.getWeight(component, TypeUnits.GRAMS))
+            );
+        }
+    }
+
+    @Override
     public void deleteByName(String name) {
-        List<Product> productList = findAllElements();
+        List<Product> productList = findAll();
         for(Product product : productList){
             if(Objects.equals(product.getName(), name))
                 productRepository.delete(product);
@@ -55,7 +59,7 @@ public class ConnectingDBServiceImpl implements ConnectingDBService {
     }
 
     @Override
-    public List<Product> findAllElements() {
+    public List<Product> findAll() {
         Iterable<Product> iterator = productRepository.findAll();
         List<Product> productList = new ArrayList<>();
         iterator.forEach(productList :: add);

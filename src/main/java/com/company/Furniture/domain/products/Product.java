@@ -1,4 +1,4 @@
-package com.company.Furniture.entities;
+package com.company.Furniture.domain.products;
 
 import lombok.*;
 

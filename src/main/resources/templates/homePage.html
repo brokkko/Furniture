@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Заказ</title>
+</head>
+<body>
+    <div align="center">
+        <h1>Оставить заказ</h1>
+        <form method="post" enctype="multipart/form-data" action="loadFromFile">
+            <input type="file" name="file">
+            <button type="submit">Добавить</button>
+        </form>
+        <form action="deleteProduct" th:method="delete" >
+            <input type="text" name="name" placeholder="Имя продукта"/>
+            <button type="submit">Удалить</button>
+        </form>
+        <form method="post" action="getProductList">
+            <button type="submit">Список заказов</button>
+        </form>
+    </div>
+</body>
+</html>

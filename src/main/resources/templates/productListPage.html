@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Заказ</title>
+</head>
+<body>
+    <div class="container">
+        <h3>Список заказов</h3>
+        <hr/>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Название</th>
+                <th>Вес</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product: ${products}">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.weight}"></td>
+            </tr>
+            </tbody>
+
+        </table>
+        <form method="post" action="return">
+            <button type="submit">Вернуться</button>
+        </form>
+    </div>
+</body>
+</html>
