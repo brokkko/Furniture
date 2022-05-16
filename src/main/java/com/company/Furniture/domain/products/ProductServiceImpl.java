@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.UUID;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -24,45 +24,49 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void save(Component component) {
+    public void create(Component component) {
         productRepository.save(new Product(component.getName(), (int) calculateService.getWeight(component, TypeUnits.GRAMS)));
     }
 
     @Override
-    public void saveAll(List<Component> componentsList) {
-        for(Component component : componentsList){
-            save(component);
+    public List<Product> readAll() {
+        Iterable<Product> iterator = productRepository.findAll();
+        List<Product> productList = new ArrayList<>();
+        iterator.forEach(productList :: add);
+        return productList;
+    }
+
+    @Override
+    public boolean update(Component component, UUID id) {
+        List<Product> productList = readAll();
+        for(Product product : productList){
+            if(product.getId().equals(id)){
+                Product newProduct = new Product(
+                        component.getName(),
+                        (int) calculateService.getWeight(component, TypeUnits.GRAMS)
+                );
+                newProduct.setId(id);
+                productRepository.save(newProduct);
+                return true;
+            }
         }
+        return false;
+    }
+
+    @Override
+    public boolean delete(UUID id) {
+        List<Product> productList = readAll();
+        for(Product product : productList){
+            if(product.getId().equals(id)){
+                productRepository.delete(product);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public void deleteAll() {
         productRepository.deleteAll();
-    }
-
-    @Override
-    public void deleteAll(List<Component> productList) {
-        for(Component component : productList){
-            productRepository.delete(
-                    new Product(component.getName(), (int) calculateService.getWeight(component, TypeUnits.GRAMS))
-            );
-        }
-    }
-
-    @Override
-    public void deleteByName(String name) {
-        List<Product> productList = findAll();
-        for(Product product : productList){
-            if(Objects.equals(product.getName(), name))
-                productRepository.delete(product);
-        }
-    }
-
-    @Override
-    public List<Product> findAll() {
-        Iterable<Product> iterator = productRepository.findAll();
-        List<Product> productList = new ArrayList<>();
-        iterator.forEach(productList :: add);
-        return productList;
     }
 }
