@@ -29,6 +29,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product read(UUID id) {
+        List<Product> productList = readAll();
+        for(Product product : productList){
+            if(product.getId().equals(id)){
+                return product;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public List<Product> readAll() {
         Iterable<Product> iterator = productRepository.findAll();
         List<Product> productList = new ArrayList<>();
@@ -39,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean update(Component component, UUID id) {
         List<Product> productList = readAll();
-        for(Product product : productList){
+        for(Product product : productList){ // !!!
             if(product.getId().equals(id)){
                 Product newProduct = new Product(
                         component.getName(),
@@ -54,15 +65,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean delete(UUID id) {
+    public Product delete(UUID id) {
         List<Product> productList = readAll();
         for(Product product : productList){
             if(product.getId().equals(id)){
                 productRepository.delete(product);
-                return true;
+                return product;
             }
         }
-        return false;
+        return null;
     }
 
     @Override

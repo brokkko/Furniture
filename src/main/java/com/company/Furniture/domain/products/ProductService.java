@@ -7,8 +7,9 @@ import java.util.UUID;
 
 public interface ProductService {
     void create(Component product);
+    Product read(UUID id);
     List<Product> readAll();
     boolean update(Component component, UUID id);
-    boolean delete(UUID id);
+    Product delete(UUID id);
     void deleteAll();
 }
