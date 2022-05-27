@@ -4,6 +4,7 @@ import com.company.Furniture.components.furniture.Component;
 import com.company.Furniture.components.options.CalculateService;
 import com.company.Furniture.components.options.CalculateServiceImpl;
 import com.company.Furniture.components.types.TypeUnits;
+import com.company.Furniture.exceptions.NotFoundException;
 import com.company.Furniture.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
                 return product;
             }
         }
-        return null;
+        throw new NotFoundException("Object " + id + " not found.");
     }
 
     @Override
@@ -48,7 +49,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean update(Component component, UUID id) {
+    public Product update(Component component, UUID id) {
+        // how to convert UUID type to int or if im gonna write a custom method - it is still for
         List<Product> productList = readAll();
         for(Product product : productList){ // !!!
             if(product.getId().equals(id)){
@@ -58,10 +60,10 @@ public class ProductServiceImpl implements ProductService {
                 );
                 newProduct.setId(id);
                 productRepository.save(newProduct);
-                return true;
+                return newProduct;
             }
         }
-        return false;
+        throw new NotFoundException("Object " + id + " doesn't exist.");
     }
 
     @Override
@@ -73,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
                 return product;
             }
         }
-        return null;
+        throw new NotFoundException("Object " + id + " not found.");
     }
 
     @Override

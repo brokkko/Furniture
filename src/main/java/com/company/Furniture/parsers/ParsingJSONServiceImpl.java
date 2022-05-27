@@ -1,6 +1,7 @@
 package com.company.Furniture.parsers;
 
 import com.company.Furniture.components.furniture.Component;
+import com.company.Furniture.exceptions.NotFoundException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,7 @@ public class ParsingJSONServiceImpl implements ParsingDataService {
             return objectMapper.readValue(parent.toPrettyString(), type);
         } catch (IllegalArgumentException e){
             LOG.warn("Class name is not correct: ", e);
-            return null;
+            throw new NotFoundException("Incorrect object name - that object is not exist.");
         }
     }
 }
